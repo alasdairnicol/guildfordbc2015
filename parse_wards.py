@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import json
 
 import requests
@@ -21,11 +23,12 @@ def fetch_boundaries(wards):
     Fetch the ward boundaries from the mapit site
     """
     for w in wards.values():
+        print("Fetching ward {}".format(w['name']))
         url = "http://mapit.mysociety.org/area/{}.geojson".format(w['id'])
         response = requests.get(url)
         filename = "wards/{}.geojson".format(w['id'])
         with open(filename, 'w') as f:
-            f.write(response.content)
+            f.write(response.content.decode('utf-8'))
 
 if __name__ == "__main__":
     wards = get_wards()

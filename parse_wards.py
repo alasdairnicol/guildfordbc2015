@@ -34,14 +34,18 @@ def construct_borough_json(ward_info):
     """
     Creates a single json file with all the wards
     """
-    shapes = {}
+    multipolygon = {
+        "type": "MultiPolygon",
+        "coordinates": []
+    }
     for ward_id, ward in ward_info.items():
         filename = "wards/{}.geojson".format(ward['id'])
         with open(filename, 'r') as f:
-            shapes[ward_id] = json.loads(f.read())
+            polygon = json.loads(f.read())
+            multipolygon['coordinates'].append(polygon['coordinates'])
 
     with open("wards/guildford.json", 'w') as f:
-        f.write(json.dumps(list(shapes.values())))
+        f.write(json.dumps(multipolygon))
 
 if __name__ == "__main__":
     ward_info = get_ward_info()

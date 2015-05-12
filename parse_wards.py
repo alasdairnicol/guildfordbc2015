@@ -43,6 +43,7 @@ def construct_borough_json(ward_info):
         filename = "wards/{}.geojson".format(ward['id'])
         with open(filename, 'r') as f:
             polygon = json.loads(f.read())
+            polygon['properties'] = {'name': ward['name']}
             collection['features'].append(polygon)
 
     with open("wards/guildford.geojson", 'w') as f:

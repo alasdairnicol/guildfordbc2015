@@ -44,7 +44,7 @@ def construct_borough_json(ward_info):
             polygon = json.loads(f.read())
             multipolygon['coordinates'].append(polygon['coordinates'])
 
-    with open("wards/guildford.json", 'w') as f:
+    with open("wards/guildford.geojson", 'w') as f:
         f.write(json.dumps(multipolygon))
 
 if __name__ == "__main__":

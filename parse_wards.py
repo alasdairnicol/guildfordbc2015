@@ -24,7 +24,7 @@ def get_ward_info(council):
     """
     Construct a dictionary of wards
     """
-    url = "http://mapit.mysociety.org/area/{}/children".format(council['id'])
+    url = "https://mapit.mysociety.org/area/{}/children".format(council['id'])
     response = requests.get(url)
     
     with open("{}/children.json".format(council['name']), 'wb') as f:
@@ -42,7 +42,7 @@ def fetch_boundaries(council, ward_info):
     """
     for ward in ward_info.values():
         print("Fetching ward {}".format(ward['name']))
-        url = "http://mapit.mysociety.org/area/{}.geojson".format(ward['id'])
+        url = "https://mapit.mysociety.org/area/{}.geojson".format(ward['id'])
         response = requests.get(url)
         filename = "{}/wards/{}.geojson".format(council['name'], ward['id'])
         with open(filename, 'wb') as f:

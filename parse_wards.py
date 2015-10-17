@@ -64,7 +64,7 @@ def construct_borough_json(council, ward_info):
             polygon['properties'] = {'name': ward['name']}
             collection['features'].append(polygon)
 
-    with open("{}/wards/{}.geojson".format(council['name'], council['name']), 'w') as f:
+    with open("{}/{}.geojson".format(council['name'], council['name']), 'w') as f:
         f.write(json.dumps(collection))
 
 if __name__ == "__main__":
